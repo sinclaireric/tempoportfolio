@@ -1,0 +1,110 @@
+
+
+.colnav{
+    color:#0d0c22;
+}
+
+
+
+.opa035{
+    opacity: 0.35;
+}
+
+.bmc-dash-pill-active {
+    background: rgba(19,18,52,.05);
+}
+
+.bmc-dash-pill {
+    border-radius: 12px;
+    padding: 9px 17px;
+    margin-right: 10px;
+}
+
+
+
+ .bmc-dash-pill span {
+    color:#6e6d7a!important;
+}
+
+.bmc-dash-pill:hover span, .bmc-dash-pill-active span {
+    color: #0d0c22!important;
+}
+
+.color-0d0, .color-0D0 {
+    color: #0d0c22;
+}
+
+.beta-tag {
+    padding: 1px 8px;
+    line-height: 19px;
+    height: 21px;
+    font-size: 11px;
+    margin-top: 2px;
+    margin-left: 10px;
+}
+
+.grey-bg-dim {
+    background-color: rgba(13,12,34,.05);
+}
+
+.rad16{
+    border-radius: 16px;
+}
+
+.t-0 {
+    top: 0!important;
+}
+
+.ab-link, .p-b-wrap {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+    top: 0;
+    z-index: 1;
+}
+
+.menuside li{
+    border-radius: 8px;
+}
+
+.ant-menu-item-only-child {
+    padding-left: 60px;
+    font-size: 16px;
+    margin-bottom: 0px!important;
+}
+
+.menuside li:hover{
+
+    background-color: rgba(13,12,34,.04);
+    border-radius: 8px;
+}
+
+
+.ant-menu-inline > .ant-menu-item {
+    height:45px!important;
+}
+
+.menuside li.ant-menu-item-selected {
+
+    background-color: rgba(24, 144, 255, 0.08) !important;
+
+}
+
+.menuside li.ant-menu-item-selected span {
+
+    color:#1890ff!important;
+    font-family: "Avenir Heavy";
+
+}
+
+.ant-menu-inline .ant-menu-item::after {
+    border-right: 0!important;
+}
+
+.ant-menu-submenu > .ant-menu {
+
+    background-color: transparent!important;
+
+}
