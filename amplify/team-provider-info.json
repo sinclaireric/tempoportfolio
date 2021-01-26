@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-semposaws-dev-162702-authRole",
+      "UnauthRoleArn": "arn:aws:iam::966576215062:role/amplify-semposaws-dev-162702-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::966576215062:role/amplify-semposaws-dev-162702-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-semposaws-dev-162702-deployment",
+      "UnauthRoleName": "amplify-semposaws-dev-162702-unauthRole",
+      "StackName": "amplify-semposaws-dev-162702",
+      "StackId": "arn:aws:cloudformation:eu-central-1:966576215062:stack/amplify-semposaws-dev-162702/fea7fc20-5fea-11eb-8358-023f5cc5fb1a",
+      "AmplifyAppId": "d2p79iivvqv5bj"
+    }
+  }
+}
