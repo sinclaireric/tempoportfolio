@@ -10,6 +10,11 @@
       "StackName": "amplify-semposaws-dev-162702",
       "StackId": "arn:aws:cloudformation:eu-central-1:966576215062:stack/amplify-semposaws-dev-162702/fea7fc20-5fea-11eb-8358-023f5cc5fb1a",
       "AmplifyAppId": "d2p79iivvqv5bj"
+    },
+    "categories": {
+      "auth": {
+        "semposawse9fcccef": {}
+      }
     }
   }
 }

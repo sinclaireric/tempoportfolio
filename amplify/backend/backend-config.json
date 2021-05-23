@@ -1,1 +1,13 @@
-{}
+{
+  "auth": {
+    "semposawse9fcccef": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {},
+  "function": {},
+  "api": {}
+}

@@ -6,35 +6,52 @@ import {Form, Input, Button, message} from 'antd';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {URL} from "../../urlapi";
-import  './sign.css';
 import {useHistory} from "react-router";
+import { Auth } from "aws-amplify";
+import  './sign.css';
+import {useAppContext} from "../../libs/contextLib";
+import jwt_decode from "jwt-decode";
 
 
 export default function  Login () {
 
     const [loading,setLoading] = useState(false)
     const history = useHistory()
+    const { setUsername } = useAppContext();
+    const { setPermissions } = useAppContext();
+
+
+    const onSubmit = ( values ) =>  {
 
 
 
-    async function onSubmit ( values )  {
-
-        try {
             setLoading(true)
-            const result = await axios.post(URL + '/api/user/login',
-                values
-            )
-            const serializedState = JSON.stringify(result.data)
-            localStorage.setItem('user',serializedState )
-            history.push("/");
-            message.success('Connexion réussie!!')
-            setLoading(false)
 
-        } catch(e) {
+
+            Auth.signIn(values.email,values.password)
+                .then(user => {
+
+
+                    localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);
+
+                    const decoded = jwt_decode(user.signInUserSession.idToken.jwtToken);
+                    // set permissions and username here
+console.log(decoded["cognito:username"])
+                    setUsername(decoded["cognito:username"])
+
+                    history.push("/admin");
+                    message.success('Connexion réussie!!')
+
+                    setLoading(false)
+
+
+                }).catch(e => {
             setLoading(false)
+            console.log('error signing in:', e);
+
             message.warning('Erreur connexion!')
 
-        }
+        })
 
     }
 
@@ -96,9 +113,7 @@ export default function  Login () {
                 />
             </Form.Item>
 
-            <div className="fl-r w100 u-mar-bottom-l av-roman " style={{textAlign:'right'}}><Link to={'/reset'} className="login-form-forgot fs12" >
-                Mot de passe oublié ?
-            </Link>
+            <div className="fl-r w100 u-mar-bottom-l av-roman " style={{textAlign:'right'}}>
             </div>
 
 
@@ -113,12 +128,7 @@ export default function  Login () {
 
 
 
-            <div className="fl-r w100 u-mar-bottom-l av-roman" style={{textAlign:'center'}}>
-                je n'ai pas de compte !
-                <Link to={'/register'} className="login-form-forgot fs12 u-mar-left-xs" >
-                    crééer gratuitement un compte
-                </Link>
-            </div>
+           
 
 
         </Form>

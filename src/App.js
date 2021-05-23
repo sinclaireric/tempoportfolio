@@ -1,36 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Route,
     Switch,
     Redirect,BrowserRouter as Router,
 } from 'react-router-dom';
 
+import { AppContext } from "./libs/contextLib";
+
+
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
 
 import Login from "./components/sign/Login"
 import Register from "./components/sign/Signup"
-import Reset from "./components/sign/reset"
-import Home from "./components/home"
-import Employes from "./components/employes/employes"
-import EmployesRoles from "./components/employes/roles"
+import Products from "./components/video/video";
+import Home from "./components/home/home";
 
-import Products from "./components/product/product";
-import AddBasicProducts from "./components/product/addbasicproduct";
-
-
-import Category from "./components/product/category";
 
 import 'antd/dist/antd.css';
 import './App.css';
+Amplify.configure(awsconfig)
 
       function Base  () {
 
-          const [isAuthenticated, userHasAuthenticated] = useState(false);
-          const [isAuthenticating, setIsAuthenticating] = useState(true);
-          const [email,setEmail] = useState()
-          const [firstName,setFirstName] = useState()
+          const [username,setUsername] = useState()
+          const [permissions,setPermissions] = useState()
 
 
-          const isAuth = () => localStorage.getItem("user") != null
+          const isAuth = () => localStorage.getItem("token") != null
+
+
 
           const PrivateRoute = ({ component: Component, ...rest }) => (
               <Route {...rest} render={props => {
@@ -47,10 +46,6 @@ import './App.css';
 
 
 
-          /* useEffect(() => {
-               onLoad();
-           }, []);
- */
 
 
           return(
@@ -62,31 +57,19 @@ import './App.css';
 
                   <Router>
 
+                      <AppContext.Provider value={{setUsername,username,permissions,setPermissions}}>
+
+                      <Switch>
+                          <Route exact path="/" component={Home}/> 
+                          <PrivateRoute exact path="/admin" component={Products}/>
+                          <Route exact path="/login" component={Login}/>
+                          <Route exact path="/register" component={Register}/>
 
 
+                      </Switch>
 
-
-                          <Switch>
-
-                              <PrivateRoute exact path="/" component={Home}/>
-
-                              <PrivateRoute exact path="/employes" component={Employes}/>
-                              <PrivateRoute exact path="/employes/roles" component={EmployesRoles}/>
-
-                              <PrivateRoute exact path="/products" component={Products}/>
-                              <PrivateRoute exact path="/products/new/basic" component={AddBasicProducts}/>
-
-                              <PrivateRoute exact path="/products/category" component={Category}/>
-
-                              <Route exact path="/login" component={Login}/>
-                              <Route exact path="/register" component={Register}/>
-                              <Route exact path="/reset" component={Reset}/>
-
-
-                          </Switch>
-
+                      </AppContext.Provider>
                   </Router>
-
 
 
               </div>

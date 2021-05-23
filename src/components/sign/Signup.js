@@ -1,14 +1,16 @@
 
 import React, { useState} from 'react';
-
+import jwt_decode from "jwt-decode";
 import logo from '../../logo.svg';
 import { Form,Row,Col,message, Input, Button,Select} from 'antd';
 import axios from "axios";
 
 import {useHistory} from "react-router";
 import {URL} from '../../urlapi';
+import { useAppContext } from "../../libs/contextLib";
 
 import {Link} from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 
 export default function  Login () {
@@ -16,6 +18,8 @@ export default function  Login () {
 
     const [loading,setLoading] = useState(false)
     const history = useHistory()
+    const { setUsername } = useAppContext();
+    const { setPermissions } = useAppContext();
 
 
     const {Option} = Select;
@@ -28,26 +32,67 @@ export default function  Login () {
    async function onSubmit ( values )  {
 
 
-       console.log(values)
-
-
+if(!loading) {
 
        try {
            setLoading(true)
-           const result = await axios.post(URL + '/api/staff/create-start',
-               values
-           )
-           const serializedState = JSON.stringify(result.data)
-           localStorage.setItem('user',serializedState )
-           history.push("/");
-           message.success('Enregistrement réussi!!')
+
+           const { user } = await Auth.signUp({
+               username:values.email,
+               password:values.password,
+               attributes: {
+                   email:values.email,          // optional
+                   phone_number:values.phone,   // optional - E.164 number convention
+                   // other custom attributes
+               },
+               clientMetadata: {
+                   businessType: values.businessType,
+                   businessName: values.businessName,
+                   firstName:values.firstname,
+                   lastName:values.lastname,
+
+               }
+           });
+
+
+
+
+
+           Auth.signIn(values.email,values.password)
+               .then(user => {
+
+
+                   localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);
+
+                   const decoded = jwt_decode(user.signInUserSession.idToken.jwtToken);
+                   // set permissions and username here
+
+                   setUsername(decoded["cognito:username"])
+
+                   history.push("/");
+                   message.success('Inscription réussie!!')
+
+                   setLoading(false)
+
+               }).catch(e => {
+               setLoading(false)
+               console.log('error signing in:', e);
+
+               message.warning('Erreur connexion!')
+
+           })
+
+
+
+
+       } catch (error) {
            setLoading(false)
 
-       } catch(e) {
-           setLoading(false)
-           message.warning('Erreur enregistrement!')
-
+           console.log('error signing up:', error);
        }
+
+}
+
 
     }
 
@@ -55,7 +100,7 @@ export default function  Login () {
 
     return (
 
-        <div className="flex column w100 h100  itemcenter ">
+        <div className="flex column w100 h100  itemcenter justcenter ">
         <Form
             name="normal_login"
             className="login-form w35 bgwhite  u-pad-horizontal-l u-pad-top-s rad8 z999"
@@ -67,10 +112,13 @@ export default function  Login () {
             onFinish={onSubmit}
         >
 
-            <img src={logo} className="w22 u-mar-bottom-s"/>
 
-            <h1 className="av-heavy fs30 u-mar-bottom-s coltext" > Crééer un compte</h1>
+<div className="flex justbtw itemcenter">
+            <h1 className="av-heavy fs24 u-mar-bottom-s coltext grille25" > Crééer un compte</h1>
 
+            <img src={logo} className="w15 u-mar-bottom-xs grille"/>
+
+</div>
             <Row gutter={24}>
                 <Col span={12}>
             <Form.Item
