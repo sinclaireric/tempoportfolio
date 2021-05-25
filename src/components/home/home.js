@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 import Videoplayer from "./videoplayer";
 import {Logout} from "../../helpers/logout";
 import HoverVideoPlayer from 'react-hover-video-player';
-import ReactPlayer from 'react-player'
 
 const {  Content } = Layout;
 export default function  Home () {
@@ -21,6 +20,8 @@ export default function  Home () {
     const [record,setRecord] = useState(null)
     const [videodetail,setVideodetail] = useState(null)
     const token = localStorage.getItem('token');
+    const [filteredArray,setFilteredArray] = useState([])
+    const [filteredOptions,setFilteredOptions] = useState([])
 
     const [videos,setVideos] = useState(null)
 
@@ -60,7 +61,28 @@ export default function  Home () {
 
 
 
-  
+  const filterAction = (option) => {
+
+    let options = filteredOptions.concat(option)
+    setFilteredOptions(options)
+
+
+
+
+
+    options.map((option)=>{
+
+      let fil =  videos.filter(((i) => i.secteur == option ))
+
+      let newarr = filteredArray.concat(fil)
+      setFilteredArray(newarr)
+
+
+      
+
+    })
+
+  }
 
 
     const detailsVideo = (vid) => {
@@ -80,7 +102,7 @@ export default function  Home () {
 
     const menu = (
         <Menu style={{width:'200px',marginTop:'60px',maxHeight:400 }} >
-            <Menu.Item key="0" className="flex itemcenter"  >
+            <Menu.Item key="0" className="flex itemcenter" onClick = {()=>filterAction("Food-Boisson")}  >
 
 
             <div className="  itemcenter flex">
@@ -95,7 +117,7 @@ export default function  Home () {
             <Menu.Divider />
 
          
-            <Menu.Item key="0" className="flex itemcenter"  >
+            <Menu.Item key="0" className="flex itemcenter" onClick = {()=>filterAction("Service")} >
 
 
 <div className="  itemcenter flex">
@@ -269,7 +291,14 @@ export default function  Home () {
 
 <div className="flex itemcenter cursor justcenter rad4 u-pad-horizontal-l u-mar-right-m nomarres filter"  >
 
-    <span className="fs14 fW600 u-mar-right-xs"> Secteur</span>
+    <span className="fs14 fW600 u-mar-right-xs"> Secteur </span>
+
+   { filteredOptions.length > 0 &&
+    <span style={{backgroundColor:'green',color:'white',padding:5,borderRadius:'50%',height:'20px',
+    width:'20px',
+    marginLeft:'10px'}} className="flex justcenter itemcenter"> {filteredOptions.length}
+     </span>
+     }
 </div>
 
 
@@ -301,33 +330,35 @@ export default function  Home () {
 
 </div>
                               <div className="masonry">
-
+                             { console.log(filteredOptions) }
 
 { videos != null && videos.map( (vid) =>  
 
 <div onClick={()=>detailsVideo(vid)}>
    
-<HoverVideoPlayer
-      videoSrc={vid.url}
-      pausedOverlay={
+   <HoverVideoPlayer
+         videoSrc={vid.url}
+         pausedOverlay={
+   
+           <img src={vid.thumbimage} alt="" style={{width:'100%',height: "100%"}} />
+           
+         }
+         restartOnPaused
+         muted={false}
+         loadingOverlay={
+           <div className="loading-spinner-overlay" style={{width:'100%',
+               height: '100%',
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'center'}} >
+   Chargement...
+               </div>
+         }
+       />  
+   
+   </div>
 
-        <img src={vid.thumbimage} alt="" style={{width:'100%',height: "100%"}} />
-        
-      }
-      restartOnPaused
-      muted={false}
-      loadingOverlay={
-        <div className="loading-spinner-overlay" style={{width:'100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'}} >
-Chargement...
-            </div>
-      }
-    />  
 
-</div>
 
 )
 

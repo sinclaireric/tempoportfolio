@@ -17,8 +17,8 @@ export default function  Videoplayer ({videodetail}) {
 
     return (
 
-        <div className="flex h100  ">
-        <div className="grille h100 justcenter itemcenter u-pad-horizontal-s" style={{backgroundColor:'#f0f0f0',height:'100%'}}>
+        <div className="flex h100 columnres rescolumn ">
+        <div className="grille grilleres h100 justcenter itemcenter u-pad-horizontal-s" style={{backgroundColor:'#f0f0f0',height:'100%'}}>
 
 <div className="hover h100 justcenter itemcenter flex" style={{width:'100%',height:'100%'}}>
         <HoverVideoPlayer

@@ -2810,6 +2810,9 @@ CalendarMonth_caption {
   .w50res{
     width:50%!important
   }
+  .grilleres{
+    flex: 4 !important
+  }
   /* flex */
   .whiteres{
     color:white!important;
