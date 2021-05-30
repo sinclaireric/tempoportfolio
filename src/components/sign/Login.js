@@ -36,7 +36,6 @@ export default function  Login () {
 
                     const decoded = jwt_decode(user.signInUserSession.idToken.jwtToken);
                     // set permissions and username here
-console.log(decoded["cognito:username"])
                     setUsername(decoded["cognito:username"])
 
                     history.push("/admin");

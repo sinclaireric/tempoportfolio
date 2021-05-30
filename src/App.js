@@ -29,8 +29,6 @@ Amplify.configure(awsconfig)
 
           const isAuth = () => localStorage.getItem("token") != null
 
-
-
           const PrivateRoute = ({ component: Component, ...rest }) => (
               <Route {...rest} render={props => {
                   return isAuth()
@@ -61,7 +59,7 @@ Amplify.configure(awsconfig)
 
                       <Switch>
                           <Route exact path="/" component={Home}/> 
-                          <PrivateRoute exact path="/admin" component={Products}/>
+                          <Route exact path="/tempoadmin" component={Products}/>
                           <Route exact path="/login" component={Login}/>
                           <Route exact path="/register" component={Register}/>
 

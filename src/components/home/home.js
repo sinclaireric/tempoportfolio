@@ -33,9 +33,7 @@ export default function  Home () {
         const getVideos = async () => {
             try {
             const result = await axios.get('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories', {
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
+    
             })
 
             setVideos(result.data);
@@ -344,7 +342,6 @@ export default function  Home () {
            
          }
          restartOnPaused
-         muted={false}
          loadingOverlay={
            <div className="loading-spinner-overlay" style={{width:'100%',
                height: '100%',
