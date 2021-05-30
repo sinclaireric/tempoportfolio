@@ -34,7 +34,7 @@ export default function  FormVideo({close,record}) {
                 values.thumb = urlthumb;
                 console.log(values)
             setLoading(true)
-            const result = await axios.post('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories',
+            const result = await axios.post('https://21p779smo7.execute-api.eu-west-3.amazonaws.com/dev/videos',
                 values,{
                     headers: {
                         'Authorization': 'Bearer ' + token
@@ -75,7 +75,7 @@ export default function  FormVideo({close,record}) {
 
                
             setLoadingEdit(true)
-            const result = await axios.delete('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories/'+record.PK,
+            const result = await axios.delete('https://21p779smo7.execute-api.eu-west-3.amazonaws.com/dev/videos/'+record.PK,
                 {
                     headers: {
                         'Authorization': 'Bearer ' + token

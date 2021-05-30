@@ -32,7 +32,7 @@ export default function  Home () {
 
         const getVideos = async () => {
             try {
-            const result = await axios.get('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories', {
+            const result = await axios.get('https://21p779smo7.execute-api.eu-west-3.amazonaws.com/dev/videos', {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
