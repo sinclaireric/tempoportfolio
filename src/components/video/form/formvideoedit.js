@@ -72,8 +72,6 @@ export default function  FormVideo({close,record}) {
 
 
         try {
-
-               
             setLoadingEdit(true)
             const result = await axios.delete('https://21p779smo7.execute-api.eu-west-3.amazonaws.com/dev/videos/'+record.PK,
                 {
