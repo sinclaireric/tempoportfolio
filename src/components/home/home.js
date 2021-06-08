@@ -22,6 +22,7 @@ export default function  Home () {
     const token = localStorage.getItem('token');
     const [filteredArray,setFilteredArray] = useState([])
     const [filteredOptions,setFilteredOptions] = useState([])
+    const [filteredStyleOptions,setFilteredStyleOptions] = useState([])
 
     const [videos,setVideos] = useState(null)
 
@@ -60,28 +61,288 @@ export default function  Home () {
 
 
   const filterAction = (option) => {
+    
 
+// pas d'options
+   if( filteredOptions.filter(u => u == option).length == 0 ) {
     let options = filteredOptions.concat(option)
     setFilteredOptions(options)
 
 
 
+    options.map((option)=>{
+
+        let fil =  videos.filter(((i) => i.secteur == option ))
+  
+        let newarr = filteredArray.concat(fil)
+        setFilteredArray(newarr)
+
+    
+      })
+
+    } else {
+
+        // on retire l'element
+let options = filteredOptions.filter(u => u != option ) 
+
+if(options.length == 0) {
+    setFilteredArray([])
+    setFilteredOptions([])
+    return;
+}
+
+console.log(options)
+setFilteredOptions(options)        
+
+
+
+
+
+///
+
+
+if(options.length > 1 ){
+
+let arrt = []
+    options.map((option)=>{
+        console.log(filteredArray)
+        if(filteredArray.length == 0 ) {
+
+
+        let fil =  videos.filter(((i) => i.secteur == option ))
+  
+        let newarr = filteredArray.concat(fil)
+        setFilteredArray(newarr)
+
+        }else{
+            console.log(filteredArray)
+console.log(option)
+console.log(filteredArray.filter(((i) => i.secteur == option)) )
+            let fil =  filteredArray.filter(((i) => i.secteur == option ))
+  
+
+            fil.map(u=>{
+                console.log(u)
+                arrt.push(u)
+            })
+   
+
+console.log(arrt)
+
+        }
+
+
+
+
+
+      })
+      console.log(arrt)
+
+      setFilteredArray(arrt)
+
+
+
+
+}else{
+
 
 
     options.map((option)=>{
-
-      let fil =  videos.filter(((i) => i.secteur == option ))
-
-      let newarr = filteredArray.concat(fil)
-      setFilteredArray(newarr)
+        console.log(filteredArray)
+        if(filteredArray.length == 0 ) {
 
 
-      
+        let fil =  videos.filter(((i) => i.secteur == option ))
+  
+        let newarr = filteredArray.concat(fil)
+        setFilteredArray(newarr)
 
-    })
+        }else{
+            console.log(filteredArray)
+console.log(option)
+console.log(filteredArray.filter(((i) => i.secteur == option)) )
+            let fil =  filteredArray.filter(((i) => i.secteur == option ))
+  
+
+
+            setFilteredArray(fil)
+
+
+        }
+
+
+
+      })
+
+
+
+
+
+
+
+}
+
+
+   
+
+
+
+
+
+
+    }
+
+   
+
+
+
+
+    
 
   }
 
+
+  const filterStyleAction = (option) => {
+    
+
+    // pas d'options
+       if( filteredStyleOptions.filter(u => u == option).length == 0 ) {
+        let options = filteredStyleOptions.concat(option)
+        setFilteredStyleOptions(options)
+    
+    
+    
+        options.map((option)=>{
+    
+
+            if(filteredOptions.length > 0) {
+
+                let fil =  filteredArray.filter(((i) => i.style == option ))
+      
+                let newarr = filteredArray.concat(fil)
+                setFilteredArray(newarr)
+
+
+
+            }else{
+
+
+                let fil =  videos.filter(((i) => i.style == option ))
+      
+                let newarr = filteredArray.concat(fil)
+                setFilteredArray(newarr)
+
+            }
+            
+    
+        
+          })
+    
+        } else {
+    
+            // on retire l'element
+    let options = filteredStyleOptions.filter(u => u != option ) 
+    
+    if(options.length == 0 && filteredOptions.length == 0) {
+        setFilteredArray([])
+        setFilteredStyleOptions([])
+        return;
+    }
+    
+    setFilteredStyleOptions(options)        
+    
+    
+    
+    
+    
+    ///
+    
+    
+    if(options.length > 1 ){
+    
+    let arrt = []
+        options.map((option)=>{
+            console.log(filteredArray)
+            if(filteredArray.length == 0 ) {
+    
+    
+            let fil =  videos.filter(((i) => i.style == option ))
+      
+            let newarr = filteredArray.concat(fil)
+            setFilteredArray(newarr)
+    
+            }else{
+                let fil =  filteredArray.filter(((i) => i.style == option ))
+      
+    
+                fil.map(u=>{
+                    arrt.push(u)
+                })
+       
+    
+            }
+    
+    
+    
+    
+    
+          })
+    
+          setFilteredArray(arrt)
+    
+    
+    
+    
+    }else{
+    
+    
+    
+        options.map((option)=>{
+            console.log(filteredArray)
+            if(filteredArray.length == 0 ) {
+    
+    
+            let fil =  videos.filter(((i) => i.style == option ))
+      
+            let newarr = filteredArray.concat(fil)
+            setFilteredArray(newarr)
+    
+            }else{
+                console.log(filteredArray)
+    console.log(option)
+    console.log(filteredArray.filter(((i) => i.style == option)) )
+                let fil =  filteredArray.filter(((i) => i.style == option ))
+      
+    
+    
+                setFilteredArray(fil)
+    
+    
+            }
+
+          })
+    
+    
+    }
+    
+    
+       
+    
+    
+    
+    
+    
+    
+        }
+    
+       
+    
+    
+    
+    
+        
+    
+      }
 
     const detailsVideo = (vid) => {
 
@@ -100,10 +361,10 @@ export default function  Home () {
 
     const menu = (
         <Menu style={{width:'200px',marginTop:'60px',maxHeight:400 }} >
-            <Menu.Item key="0" className="flex itemcenter" onClick = {()=>filterAction("Food-Boisson")}  >
+            <Menu.Item key="0" className={"flex itemcenter" + (filteredOptions.includes('Food-Boisson') ? ' activefilter' : '' )} onClick = {()=>filterAction("Food-Boisson")}  >
 
 
-            <div className="  itemcenter flex">
+            <div className={"itemcenter flex"}>
 
 
 <span className="av-heavy fs14">Food / Boisson</span>
@@ -115,7 +376,7 @@ export default function  Home () {
             <Menu.Divider />
 
          
-            <Menu.Item key="0" className="flex itemcenter" onClick = {()=>filterAction("Service")} >
+            <Menu.Item key="1" className={"flex itemcenter" + (filteredOptions.includes('Service') ? ' activefilter' : '' )} onClick = {()=>filterAction("Service")}  >
 
 
 <div className="  itemcenter flex">
@@ -128,7 +389,7 @@ export default function  Home () {
 </Menu.Item>
 <Menu.Divider />
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="2" className={"flex itemcenter" + (filteredOptions.includes('Education-Formation') ? ' activefilter' : '' )} onClick = {()=>filterAction("Education-Formation")}  >
 
 
 <div className="  itemcenter flex">
@@ -143,7 +404,7 @@ export default function  Home () {
 <Menu.Divider />
 
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="3" className={"flex itemcenter" + (filteredOptions.includes('Mode-Luxe') ? ' activefilter' : '' )} onClick = {()=>filterAction("Mode-Luxe")}  >
 
 
 <div className="  itemcenter flex">
@@ -157,7 +418,7 @@ export default function  Home () {
 <Menu.Divider />
 
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="4" className={"flex itemcenter" + (filteredOptions.includes('Sante-Social') ? ' activefilter' : '' )} onClick = {()=>filterAction("Sante-Social")}  >
 
 
 <div className="  itemcenter flex">
@@ -177,8 +438,8 @@ export default function  Home () {
 
 
     const menuStyle = (
-        <Menu style={{width:'200px',marginTop:'60px',maxHeight:400 }} >
-            <Menu.Item key="0" className="flex itemcenter"  >
+        <Menu style={{width:'200px',marginTop:'60px',maxHeight:400 }}   >
+            <Menu.Item key="0" className={"flex itemcenter" + (filteredStyleOptions.includes('Stop-Motion') ? ' activefilter' : '' )} onClick = {()=>filterStyleAction("Stop-Motion")}  >
 
 
             <div className="  itemcenter flex">
@@ -193,7 +454,7 @@ export default function  Home () {
             <Menu.Divider />
 
          
-            <Menu.Item key="0" className="flex itemcenter"  >
+            <Menu.Item key="1" className={"flex itemcenter" + (filteredStyleOptions.includes('Motion-Design') ? ' activefilter' : '' )} onClick = {()=>filterStyleAction("Motion-Design")}  >
 
 
 <div className="  itemcenter flex">
@@ -206,7 +467,7 @@ export default function  Home () {
 </Menu.Item>
 <Menu.Divider />
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="2" className={"flex itemcenter" + (filteredStyleOptions.includes('3D') ? ' activefilter' : '' )} onClick = {()=>filterStyleAction("3D")}  >
 
 
 <div className="  itemcenter flex">
@@ -221,10 +482,10 @@ export default function  Home () {
 <Menu.Divider />
 
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="3" className={"flex itemcenter" + (filteredStyleOptions.includes('Tournage') ? ' activefilter' : '' )} onClick = {()=>filterStyleAction("Tournage")}  >
 
 
-<div className="  itemcenter flex">
+<div className="itemcenter flex">
 
 
 <span className="av-heavy fs14">Tournage </span>
@@ -235,10 +496,9 @@ export default function  Home () {
 <Menu.Divider />
 
 
-<Menu.Item key="0" className="flex itemcenter"  >
+<Menu.Item key="4" className={"flex itemcenter" + (filteredStyleOptions.includes('GIF') ? ' activefilter' : '' )} onClick = {()=>filterStyleAction("GIF")}  >
 
-
-<div className="  itemcenter flex">
+<div className="itemcenter flex">
 
 
 
@@ -257,10 +517,6 @@ export default function  Home () {
 
 
     return (
-
-
-
-
 
         <Layout className=" bgapp">
             <Header show={false} />
@@ -292,7 +548,7 @@ export default function  Home () {
     <span className="fs14 fW600 u-mar-right-xs"> Secteur </span>
 
    { filteredOptions.length > 0 &&
-    <span style={{backgroundColor:'green',color:'white',padding:5,borderRadius:'50%',height:'20px',
+    <span style={{backgroundColor:'#30cecf',color:'white',padding:5,borderRadius:'50%',height:'20px',
     width:'20px',
     marginLeft:'10px'}} className="flex justcenter itemcenter"> {filteredOptions.length}
      </span>
@@ -305,12 +561,21 @@ export default function  Home () {
 
 
 
-<Dropdown overlay={menu} class="cursor" trigger={['click']}>
+<Dropdown overlay={menuStyle} class="cursor" trigger={['click']}>
 
 
 <div className="flex itemcenter cursor justcenter rad4 u-pad-horizontal-l u-mar-right-m nomarres filter"  >
 
     <span className="fs14 fW600 u-mar-right-xs"> Style</span>
+
+
+    { filteredStyleOptions.length > 0 &&
+    <span style={{backgroundColor:'#30cecf',color:'white',padding:5,borderRadius:'50%',height:'20px',
+    width:'20px',
+    marginLeft:'10px'}} className="flex justcenter itemcenter"> {filteredStyleOptions.length}
+     </span>
+     }
+
 </div>
 
 
@@ -321,7 +586,7 @@ export default function  Home () {
 
 <div className="flex justcenter itemcenter u-pad-horizontal-l nonedisplayres" style={{borderLeft:'1px solid #ccc'}}>
     <span className="fs18 av-heavy flex">
-{videos != null ? videos.length : '--' }
+{videos != null && filteredArray.length == 0 ? videos.length :filteredArray.length > 0 ? filteredArray.length : '--' }
  <span className="u-mar-left-xs"> résultats </span>
 </span>
 </div>
@@ -329,8 +594,43 @@ export default function  Home () {
 </div>
                               <div className="masonry">
                              { console.log(filteredOptions) }
+                             { console.log(filteredArray) }
 
-{ videos != null && videos.map( (vid) =>  
+{ videos != null &&  filteredArray.length == 0 ?  videos.map( (vid) =>  
+
+
+<div onClick={()=>detailsVideo(vid)}>
+   
+    <HoverVideoPlayer
+         videoSrc={vid.url}
+         pausedOverlay={
+   
+           <img src={vid.thumbimage} alt="" style={{width:'100%',height: "100%"}} />
+           
+         }
+         restartOnPaused
+         loadingOverlay={
+           <div className="loading-spinner-overlay" style={{width:'100%',
+               height: '100%',
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'center'}} >
+   Chargement...
+               </div>
+         }
+       />   
+   
+   </div>
+
+
+
+)
+
+:videos != null && filteredArray.length > 0 ?
+
+
+filteredArray.map( (vid) =>  
+
 
 <div onClick={()=>detailsVideo(vid)}>
    
@@ -351,15 +651,17 @@ export default function  Home () {
    Chargement...
                </div>
          }
-       />  
+       /> 
    
    </div>
-
-
-
 )
 
-}
+:
+<></>
+        }
+
+
+
 
                               </div>
 

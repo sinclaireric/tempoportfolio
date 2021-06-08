@@ -40,7 +40,7 @@ export default function  FormVideo({close}) {
                 values,{
                     headers: {
                         'Authorization': 'Bearer ' + token
-                    }
+                    }   
                 }
             )
 

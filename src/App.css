@@ -3235,4 +3235,11 @@ CalendarMonth_caption {
 }
 
 
+.activefilter {
+  background-color: #30cecf;
+}
 
+
+.activefilter span {
+  color:#ffffff
+}

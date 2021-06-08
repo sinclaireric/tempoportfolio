@@ -7,9 +7,9 @@ import {
 
 import { AppContext } from "./libs/contextLib";
 
-
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
+
 
 import Login from "./components/sign/Login"
 import Register from "./components/sign/Signup"
@@ -20,7 +20,6 @@ import Home from "./components/home/home";
 import 'antd/dist/antd.css';
 import './App.css';
 Amplify.configure(awsconfig)
-
       function Base  () {
 
           const [username,setUsername] = useState()
@@ -59,7 +58,7 @@ Amplify.configure(awsconfig)
 
                       <Switch>
                           <Route exact path="/" component={Home}/> 
-                          <Route exact path="/tempoadmin" component={Products}/>
+                          <PrivateRoute exact path="/tempoadmin" component={Products}/>
                           <Route exact path="/login" component={Login}/>
                           <Route exact path="/register" component={Register}/>
 
