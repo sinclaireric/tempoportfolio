@@ -1,0 +1,12 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "C:\\Users\\flore\\.amplify\\awscloudformation\\2X0EF9Z3qI"
+  },
+  "portfolio": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  }
+}

@@ -15,10 +15,11 @@ import Login from "./components/sign/Login"
 import Register from "./components/sign/Signup"
 import Products from "./components/video/video";
 import Home from "./components/home/home";
-
+import Secteur from "./components/home/secteur";
 
 import 'antd/dist/antd.css';
 import './App.css';
+
 Amplify.configure(awsconfig)
       function Base  () {
 
@@ -61,6 +62,7 @@ Amplify.configure(awsconfig)
                           <PrivateRoute exact path="/tempoadmin" component={Products}/>
                           <Route exact path="/login" component={Login}/>
                           <Route exact path="/register" component={Register}/>
+                          <Route exact path="/secteur/:id" component={Secteur}/>
 
 
                       </Switch>

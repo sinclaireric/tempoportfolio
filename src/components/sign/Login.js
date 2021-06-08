@@ -38,7 +38,7 @@ export default function  Login () {
                     // set permissions and username here
                     setUsername(decoded["cognito:username"])
 
-                    history.push("/admin");
+                    history.push("/tempoadmin");
                     message.success('Connexion réussie!!')
 
                     setLoading(false)
@@ -85,7 +85,7 @@ export default function  Login () {
                 name="email"
                 rules={[
                     {
-                        type:'email',
+                        //type:'email',
                         required: true,
                         message: 'Inserer votre email',
                     },

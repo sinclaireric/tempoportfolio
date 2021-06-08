@@ -164,8 +164,8 @@ export default function  FormVideo({close}) {
                                                         <Select>
 
 
-                                                                <Option value="Stop motion"> Stop motion </Option>
-                                                                <Option value="Motion Design"> Motion Design </Option>
+                                                                <Option value="Stop-Motion"> Stop motion </Option>
+                                                                <Option value="Motion-Design"> Motion Design </Option>
                                                                 <Option value="3D"> 3D </Option>
                                                                 <Option value="Tournage"> Tournage </Option>
                                                                 <Option value="GIF"> GIF </Option>
