@@ -44,14 +44,8 @@ if(!loading) {
                    email:values.email,          // optional
                    phone_number:values.phone,   // optional - E.164 number convention
                    // other custom attributes
-               },
-               clientMetadata: {
-                   businessType: values.businessType,
-                   businessName: values.businessName,
-                   firstName:values.firstname,
-                   lastName:values.lastname,
-
                }
+    
            });
 
 
@@ -69,7 +63,7 @@ if(!loading) {
 
                    setUsername(decoded["cognito:username"])
 
-                   history.push("/");
+                   history.push("/tempoadmin");
                    message.success('Inscription réussie!!')
 
                    setLoading(false)
@@ -119,34 +113,7 @@ if(!loading) {
             <img src={logo} className="w15 u-mar-bottom-xs grille"/>
 
 </div>
-            <Row gutter={24}>
-                <Col span={12}>
-            <Form.Item
-                name="firstname"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Inserer votre nom',
-                    },
-                ]}
-                className="u-mar-bottom-m"
-            >
-                <Input  placeholder="Nom"   />
-            </Form.Item>
-
-                </Col>
-
-                <Col span={12}>
-                <Form.Item
-                    name="lastname"
-
-                    className="u-mar-bottom-m"
-                >
-                    <Input  placeholder="Prénom"   />
-                </Form.Item>
-                </Col>
-
-            </Row>
+           
 
 
 
@@ -164,46 +131,6 @@ if(!loading) {
                 <Input  placeholder="Télephone" maxLength={25} />
             </Form.Item>
 
-
-            <Form.Item
-                name="businessName"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Inserer le nom de votre entreprise',
-                    },
-                ]}
-                className="u-mar-bottom-m"
-            >
-                <Input  placeholder="Nom de votre boutique"  />
-            </Form.Item>
-
-
-
-
-            <Form.Item
-                name="businessType"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Inserer le type de votre activié',
-                    },
-                ]}
-                className="u-mar-bottom-m"
-            >
-                <Select placeholder="Type de business" >
-
-                    <Option value="Boutique généraliste"> Boutique généraliste</Option>
-                    <Option value="Boutique ecommerce"> Boutique ecommerce</Option>
-                    <Option value={"Institut de beauté"}>Institut de beauté  </Option>
-                    <Option value={"Pressing"}> Pressing </Option>
-                    <Option value={"Restaurant/Cafe"}> Restaurant/Cafe </Option>
-                    <Option value={"Pizerria"}> Pizerria </Option>
-                    <Option value={"Prêt à porter"} > Prêt à porter </Option>
-                    <Option value="Autres">Autres </Option>
-
-                </Select>
-            </Form.Item>
 
 
 
@@ -258,13 +185,7 @@ if(!loading) {
 
         </Form>
 
-            <div className="fl-r w100  av-roman fs10" style={{textAlign:'center'}}>
-                En vous inscrivant vous acceptez les
-                <a className="login-form-forgot fs12" href="">
-                conditions d'utilisation
-            </a>
-            </div>
-
+         
             <div className="fl-r w100 u-mar-top-s av-roman coltext" style={{textAlign:'center'}}>
                 Déja inscrit ?
                 <Link to={'/login'} className="login-form-forgot fs12" >
