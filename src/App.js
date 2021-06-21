@@ -59,6 +59,8 @@ Amplify.configure(awsconfig)
 
                       <Switch>
                           <Route exact path="/" component={Home}/> 
+                          <Route exact path="/secteur/:id" component={Secteur}/> 
+
                           <PrivateRoute exact path="/tempoadmin" component={Products}/>
                           <Route exact path="/login" component={Login}/>
                           <Route exact path="/register" component={Register}/>
