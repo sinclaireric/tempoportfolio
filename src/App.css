@@ -118,8 +118,12 @@ height: 100vh;
 
 
 .hover > div{
-  height: 95%!important;
-  width: 95%!important;
+  height: 100%!important;
+  width: 100%!important;
+}
+
+.hover > div > video {
+  object-fit: contain!important;
 }
 
 .masonry {

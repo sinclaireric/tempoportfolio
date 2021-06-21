@@ -6,14 +6,14 @@ import 'moment/locale/fr';
 import Header from '../header';
 import {Button, Layout,Modal,Spin,Dropdown, Menu,Tag, Table,Input} from 'antd';
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import Videoplayer from "./videoplayer";
 import {Logout} from "../../helpers/logout";
 import HoverVideoPlayer from 'react-hover-video-player';
 
 const {  Content } = Layout;
 export default function  Secteur () {
-
+    const { id } = useParams();
     const [loading,setLoading] = useState(true)
     const [reload,setReload] = useState(1)
     const [visible,setVisible] = useState(false)
@@ -33,7 +33,7 @@ export default function  Secteur () {
 
         const getVideos = async () => {
             try {
-            const result = await axios.get('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories/secteur', {
+            const result = await axios.get('https://ey8x98as8g.execute-api.eu-central-1.amazonaws.com/dev/categories/secteur/'+id , {
     
             })
 
@@ -59,147 +59,6 @@ export default function  Secteur () {
     }, [reload]);
 
 
-
-  const filterAction = (option) => {
-    
-
-// pas d'options
-   if( filteredOptions.filter(u => u == option).length == 0 ) {
-    let options = filteredOptions.concat(option)
-    setFilteredOptions(options)
-
-
-
-    options.map((option)=>{
-
-        let fil =  videos.filter(((i) => i.secteur == option ))
-  
-        let newarr = filteredArray.concat(fil)
-        setFilteredArray(newarr)
-
-    
-      })
-
-    } else {
-
-        // on retire l'element
-let options = filteredOptions.filter(u => u != option ) 
-
-if(options.length == 0) {
-    setFilteredArray([])
-    setFilteredOptions([])
-    return;
-}
-
-console.log(options)
-setFilteredOptions(options)        
-
-
-
-
-
-///
-
-
-if(options.length > 1 ){
-
-let arrt = []
-    options.map((option)=>{
-        console.log(filteredArray)
-        if(filteredArray.length == 0 ) {
-
-
-        let fil =  videos.filter(((i) => i.secteur == option ))
-  
-        let newarr = filteredArray.concat(fil)
-        setFilteredArray(newarr)
-
-        }else{
-            console.log(filteredArray)
-console.log(option)
-console.log(filteredArray.filter(((i) => i.secteur == option)) )
-            let fil =  filteredArray.filter(((i) => i.secteur == option ))
-  
-
-            fil.map(u=>{
-                console.log(u)
-                arrt.push(u)
-            })
-   
-
-console.log(arrt)
-
-        }
-
-
-
-
-
-      })
-      console.log(arrt)
-
-      setFilteredArray(arrt)
-
-
-
-
-}else{
-
-
-
-    options.map((option)=>{
-        console.log(filteredArray)
-        if(filteredArray.length == 0 ) {
-
-
-        let fil =  videos.filter(((i) => i.secteur == option ))
-  
-        let newarr = filteredArray.concat(fil)
-        setFilteredArray(newarr)
-
-        }else{
-            console.log(filteredArray)
-console.log(option)
-console.log(filteredArray.filter(((i) => i.secteur == option)) )
-            let fil =  filteredArray.filter(((i) => i.secteur == option ))
-  
-
-
-            setFilteredArray(fil)
-
-
-        }
-
-
-
-      })
-
-
-
-
-
-
-
-}
-
-
-   
-
-
-
-
-
-
-    }
-
-   
-
-
-
-
-    
-
-  }
 
   const filterStyleAction = (option) => {
     
@@ -358,82 +217,7 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
     }
 
 
-    const menu = (
-        <Menu style={{width:'200px',marginTop:'60px',maxHeight:400 }} >
-            <Menu.Item key="0" className={"flex itemcenter" + (filteredOptions.includes('Food-Boisson') ? ' activefilter' : '' )} onClick = {()=>filterAction("Food-Boisson")}  >
-
-
-            <div className={"itemcenter flex"}>
-
-
-<span className="av-heavy fs14">Food / Boisson</span>
-
-
-</div>
-
-            </Menu.Item>
-            <Menu.Divider />
-
-         
-            <Menu.Item key="1" className={"flex itemcenter" + (filteredOptions.includes('Service') ? ' activefilter' : '' )} onClick = {()=>filterAction("Service")}  >
-
-
-<div className="  itemcenter flex">
-
-
-<span className="av-heavy fs14">Service</span>
-
-</div>
-
-</Menu.Item>
-<Menu.Divider />
-
-<Menu.Item key="2" className={"flex itemcenter" + (filteredOptions.includes('Education-Formation') ? ' activefilter' : '' )} onClick = {()=>filterAction("Education-Formation")}  >
-
-
-<div className="  itemcenter flex">
-
-
-<span className="av-heavy fs14">Education / Formation</span>
-
-
-</div>
-
-</Menu.Item>
-<Menu.Divider />
-
-
-<Menu.Item key="3" className={"flex itemcenter" + (filteredOptions.includes('Mode-Luxe') ? ' activefilter' : '' )} onClick = {()=>filterAction("Mode-Luxe")}  >
-
-
-<div className="  itemcenter flex">
-
-
-<span className="av-heavy fs14">Mode / Luxe </span>
-
-</div>
-
-</Menu.Item>
-<Menu.Divider />
-
-
-<Menu.Item key="4" className={"flex itemcenter" + (filteredOptions.includes('Sante-Social') ? ' activefilter' : '' )} onClick = {()=>filterAction("Sante-Social")}  >
-
-
-<div className="  itemcenter flex">
-
-
-
-<span className="av-heavy fs14">Santé / Social</span>
-
-</div>
-
-</Menu.Item>
-
-
-        </Menu>
-    );
-
+  
 
 
     const menuStyle = (
@@ -539,28 +323,10 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
 
 <div className="flex justbtw">
 <div className="u-pad-horizontal-s u-pad-vertical-sm flex w100res justbtwres">
-                            <Dropdown overlay={menu} class="cursor" trigger={['click']}>
+                       
+<span className="fs18">{id}</span>
 
-
-<div className="flex itemcenter cursor justcenter rad4 u-pad-horizontal-l u-mar-right-m nomarres filter"  >
-
-    <span className="fs14 fW600 u-mar-right-xs"> Secteur </span>
-
-   { filteredOptions.length > 0 &&
-    <span style={{backgroundColor:'#30cecf',color:'white',padding:5,borderRadius:'50%',height:'20px',
-    width:'20px',
-    marginLeft:'10px'}} className="flex justcenter itemcenter"> {filteredOptions.length}
-     </span>
-     }
-</div>
-
-
-</Dropdown>
-
-
-
-
-<Dropdown overlay={menuStyle} class="cursor" trigger={['click']}>
+{/* <Dropdown overlay={menuStyle} class="cursor" trigger={['click']}>
 
 
 <div className="flex itemcenter cursor justcenter rad4 u-pad-horizontal-l u-mar-right-m nomarres filter"  >
@@ -578,7 +344,7 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
 </div>
 
 
-</Dropdown>
+</Dropdown> */}
 
 
 </div>

@@ -20,7 +20,7 @@ export default function  Home () {
     const [record,setRecord] = useState(null)
     const [videodetail,setVideodetail] = useState(null)
     const token = localStorage.getItem('token');
-    const [filteredArray,setFilteredArray] = useState([])
+    const [filteredArray,setFilteredArray] = useState(null)
     const [filteredOptions,setFilteredOptions] = useState([])
     const [filteredStyleOptions,setFilteredStyleOptions] = useState([])
 
@@ -56,7 +56,7 @@ export default function  Home () {
         getVideos();
 
 
-    }, [reload]);
+    }, []);
 
 
 
@@ -65,28 +65,99 @@ export default function  Home () {
 
 // pas d'options
    if( filteredOptions.filter(u => u == option).length == 0 ) {
+
     let options = filteredOptions.concat(option)
     setFilteredOptions(options)
 
 
 
+
+
+
+
+
+let nr = []
+let tempnr = []
     options.map((option)=>{
 
+        if(filteredStyleOptions.length > 0) {
+
+
+
+
+
+
+
+        let fil =  videos.filter(((i) => i.secteur == option ))
+
+        fil.map(u=>{
+            tempnr.push(u)
+        })
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }else{
         let fil =  videos.filter(((i) => i.secteur == option ))
   
-        let newarr = filteredArray.concat(fil)
-        setFilteredArray(newarr)
+        fil.map(u=>{
+            nr.push(u)
+        })
+    }
 
     
       })
+
+      if(filteredStyleOptions.length > 0) {
+
+let rrr = []
+        filteredStyleOptions.map((option)=>{
+
+            let fil =  tempnr.filter(((i) => i.style == option ))
+
+            fil.map(u=>{
+            nr.push(u)
+            })
+
+        })
+
+
+      
+
+
+      }
+
+      
+
+
+console.log(nr)
+      setFilteredArray(nr)
 
     } else {
 
         // on retire l'element
 let options = filteredOptions.filter(u => u != option ) 
 
-if(options.length == 0) {
-    setFilteredArray([])
+if(options.length == 0 && filteredStyleOptions.length == 0) {
+    setFilteredArray(null)
     setFilteredOptions([])
     return;
 }
@@ -102,7 +173,6 @@ setFilteredOptions(options)
 
 
 if(options.length > 1 ){
-
 let arrt = []
     options.map((option)=>{
         console.log(filteredArray)
@@ -143,16 +213,55 @@ console.log(arrt)
 
 
 
-}else{
+}else if (options.length == 1 ){
 
 
 
-    options.map((option)=>{
+
+
+
+        console.log(filteredArray)
+        if(filteredArray.length == 0 ) {
+
+        let fil =  videos.filter(((i) => i.secteur == options[0] ))
+  
+        let newarr = filteredArray.concat(fil)
+        setFilteredArray(newarr)
+
+        }else{
+
+
+let rr =[]
+   
+    let fil =  filteredArray.filter(((i) => i.secteur == options[0] ))
+
+    fil.map(u=>{
+    rr.push(u)
+    })
+ 
+  console.log(rr)
+
+  setFilteredArray(rr)
+
+
+        }
+
+
+
+
+
+
+
+}
+
+else{
+
+
         console.log(filteredArray)
         if(filteredArray.length == 0 ) {
 
 
-        let fil =  videos.filter(((i) => i.secteur == option ))
+        let fil =  videos.filter(((i) => i.secteur == options[0] ))
   
         let newarr = filteredArray.concat(fil)
         setFilteredArray(newarr)
@@ -161,18 +270,30 @@ console.log(arrt)
             console.log(filteredArray)
 console.log(option)
 console.log(filteredArray.filter(((i) => i.secteur == option)) )
-            let fil =  filteredArray.filter(((i) => i.secteur == option ))
-  
 
 
-            setFilteredArray(fil)
+let rr =[]
+filteredStyleOptions.map((option)=>{
+             console.log(option)   
+    let fil =  videos.filter(((i) => i.style == option ))
+
+    fil.map(u=>{
+    rr.push(u)
+    })
+    
+
+
+  })
+  console.log(rr)
+
+  setFilteredArray(rr)
 
 
         }
 
 
 
-      })
+     
 
 
 
@@ -210,18 +331,41 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
         let options = filteredStyleOptions.concat(option)
         setFilteredStyleOptions(options)
     
-    
-    
+  let  moarr = []
         options.map((option)=>{
     
 
             if(filteredOptions.length > 0) {
 
-                let fil =  filteredArray.filter(((i) => i.style == option ))
-      
-                let newarr = filteredArray.concat(fil)
-                setFilteredArray(newarr)
 
+                let tempnr = []
+                filteredOptions.map((option)=>{
+
+        
+            let fil =  videos.filter(((i) => i.secteur == option ))
+  
+            fil.map(u=>{
+                tempnr.push(u)
+            })
+
+    
+      })
+
+
+
+
+
+
+
+
+console.log(filteredArray)
+                let fil =  tempnr.filter(((i) => i.style == option ))
+      console.log(fil)
+
+                fil.map(u=>{
+                    moarr.push(u)
+                })
+       
 
 
             }else{
@@ -229,14 +373,21 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
 
                 let fil =  videos.filter(((i) => i.style == option ))
       
-                let newarr = filteredArray.concat(fil)
-                setFilteredArray(newarr)
+
+                fil.map(u=>{
+                    moarr.push(u)
+                })
+
+
+                
 
             }
             
     
         
           })
+
+          setFilteredArray(moarr)
     
         } else {
     
@@ -244,10 +395,12 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
     let options = filteredStyleOptions.filter(u => u != option ) 
     
     if(options.length == 0 && filteredOptions.length == 0) {
-        setFilteredArray([])
+        setFilteredArray(null)
         setFilteredStyleOptions([])
         return;
     }
+
+
     
     setFilteredStyleOptions(options)        
     
@@ -259,17 +412,18 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
     
     
     if(options.length > 1 ){
-    
     let arrt = []
         options.map((option)=>{
             console.log(filteredArray)
+
             if(filteredArray.length == 0 ) {
     
     
             let fil =  videos.filter(((i) => i.style == option ))
       
-            let newarr = filteredArray.concat(fil)
-            setFilteredArray(newarr)
+            fil.map(u=>{
+                    arrt.push(u)
+                })
     
             }else{
                 let fil =  filteredArray.filter(((i) => i.style == option ))
@@ -293,14 +447,38 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
     
     
     
-    }else{
+    }else if (options.length == 0 ){
+
+
+
+        let tempnr = []
+        filteredOptions.map((option)=>{
+
+
+    let fil =  videos.filter(((i) => i.secteur == option ))
+
+    fil.map(u=>{
+        tempnr.push(u)
+    })
+
+
+})
+
+setFilteredArray(tempnr)
+
+
+
+    }
+
     
-    
-    
-        options.map((option)=>{
-            console.log(filteredArray)
-            if(filteredArray.length == 0 ) {
-    
+    else{
+    let rr = [];
+    console.log(options)
+
+
+
+            console.log(option)
+            if(filteredArray.length == 0 && filteredOptions.length == 0 ) {
     
             let fil =  videos.filter(((i) => i.style == option ))
       
@@ -308,19 +486,26 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
             setFilteredArray(newarr)
     
             }else{
-                console.log(filteredArray)
-    console.log(option)
-    console.log(filteredArray.filter(((i) => i.style == option)) )
-                let fil =  filteredArray.filter(((i) => i.style == option ))
-      
-    
-    
-                setFilteredArray(fil)
+
+
+
+
+
+                        let fil =  filteredArray.filter(((i) => i.style != option ))
+                        fil.map(u=>{
+                        rr.push(u)
+                        })
+                       
+                    
+                
+                 
     
     
             }
 
-          })
+        
+
+          setFilteredArray(rr)
     
     
     }
@@ -345,10 +530,8 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
       }
 
     const detailsVideo = (vid) => {
-
         setVisible(true)
         setVideodetail(vid)
-
     }
 
 
@@ -586,7 +769,7 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
 
 <div className="flex justcenter itemcenter u-pad-horizontal-l nonedisplayres" style={{borderLeft:'1px solid #ccc'}}>
     <span className="fs18 av-heavy flex">
-{videos != null && filteredArray.length == 0 ? videos.length :filteredArray.length > 0 ? filteredArray.length : '--' }
+{videos != null && filteredArray == null ? videos.length :filteredArray ? filteredArray.length : '--' }
  <span className="u-mar-left-xs"> résultats </span>
 </span>
 </div>
@@ -596,12 +779,13 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
                              { console.log(filteredOptions) }
                              { console.log(filteredArray) }
 
-{ videos != null &&  filteredArray.length == 0 ?  videos.map( (vid) =>  
+{ videos != null &&  filteredArray == null ?  videos.map( (vid,index) =>  
 
 
-<div onClick={()=>detailsVideo(vid)}>
+<div onClick={()=>detailsVideo(vid)} key={vid.PK}>
    
     <HoverVideoPlayer
+    
          videoSrc={vid.url}
          pausedOverlay={
    
@@ -632,7 +816,7 @@ console.log(filteredArray.filter(((i) => i.secteur == option)) )
 filteredArray.map( (vid) =>  
 
 
-<div onClick={()=>detailsVideo(vid)}>
+<div onClick={()=>detailsVideo(vid)} key={vid.PK}>
    
    <HoverVideoPlayer
          videoSrc={vid.url}
