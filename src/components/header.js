@@ -103,10 +103,10 @@ export default function  Header ({show}) {
 
                 <div className="header  flex justbtw u-pad-horizontal-s fixed w100 itemcenter">
                     <div className="flex itemcenter">
-                        <a href="https://tempo-videos.com" target='_blank' >
+                        <a href="https://tempo-video.com" target='_blank' >
                     <img src={logo} className="w40 "/>
                     </a>
-                    <a href="https://tempo-videos.com" style={{marginLeft:15,color:'#333'}} target='_blank' >
+                    <a href="https://tempo-video.com" style={{marginLeft:15,color:'#333'}} target='_blank' >
                     Accueil
                     </a>
 
