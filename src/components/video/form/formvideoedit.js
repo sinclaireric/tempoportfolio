@@ -38,7 +38,7 @@ export default function  FormVideo({close,record}) {
                 values,{
                     headers: {
                         'Authorization': 'Bearer ' + token
-                    }         
+                    }
                 }
             )
 

@@ -106,42 +106,25 @@ export default function  Header ({show}) {
                         <a href="https://tempo-video.com" target='_blank' >
                     <img src={logo} className="w40 "/>
                     </a>
-                    <a href="https://tempo-video.com" style={{marginLeft:15,color:'#333'}} target='_blank' >
+                    <a href="https://tempo-video.com" style={{marginLeft:15,color:'#1a1b1f', fontSize:'14px'}} target='_blank' >
                     Accueil
                     </a>
 
                     </div>
                    <div className="flex itemcenter">
 
-
-            
-
 {show &&
                        <Dropdown overlay={menu} class="cursor" trigger={['click']}>
-
-
-                               <div className="flex itemcenter cursor">
-
-                                   <span className="fs12 fW600 u-mar-right-xs"> Administration </span>
-
-                                   <span style={{marginTop:'4.5px'}}>
-
-                               <CaretDownOutlined />
-
-                           </span>
-
-
-                               </div>
+                                <div className="flex itemcenter cursor">
+                                    <span className="fs12 fW600 u-mar-right-xs"> Administration </span>
+                                    <span style={{marginTop:'4.5px'}}>
+                                        <CaretDownOutlined />
+                                    </span>
+                                </div>
 
 
                            </Dropdown>
                         }
-
-
-
-
-
-
                    </div>
                 </div>
 

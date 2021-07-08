@@ -85,7 +85,7 @@ export default function  FormVideo({close}) {
         uploadPreset: 'nsvzr8fv'}, (error, result) => { 
           if (!error && result && result.event === "success") { 
             console.log('Done! Here is the image info: ', result.info); 
-            setUrlvideo(result.info.url)
+            setUrlvideo(result.info.secure_url)
             setUrlthumb(result.info.thumbnail_url)
 
 
@@ -101,7 +101,7 @@ export default function  FormVideo({close}) {
         uploadPreset: 'p8ppgwkh'}, (error, result) => { 
           if (!error && result && result.event === "success") { 
             console.log('Done! Here is the image info: ', result.info); 
-            setThumbimage(result.info.url)
+            setThumbimage(result.info.secure_url)
           }
         }
       )
